@@ -1,7 +1,52 @@
 # tf_experiments
 Experiments with tensorflow and tflite training and inference
+These configuration steps are based on Mac
 
-## Installation on Mac
+## Config for blazeFace_tf notebooks
+```shell
+# ============================
+# == Create TF2 Virtual Env ==
+# ============================
+# https://github.com/google-coral/tflite/tree/master/python/examples/detection
+# On MacBook Pro
+pip install virtualenv
+
+virtualenv ~/Envs/tf2_env -p python3
+# later, to remove:
+# rm -Rf ~/Envs/tf2_env
+source ~/Envs/tf2_env/bin/activate
+# later, to deactivate:
+# deactivate
+
+pip install tensorflow
+pip install -q pycocotools
+
+# linter
+pip install nbqa flake8 isort
+pip install jupyterlab
+
+# Make kernel available in Jupyter (as used in classification training)
+pip install ipykernel # IPython kernel for Jupyter
+python -m ipykernel install --user --name tf2_env
+# to remove it later:
+# jupyter kernelspec list
+# jupyter kernelspec remove tf2_env
+
+## =================================
+## == Monitoring with TensorBoard ==
+## ==     (in new terminal)       ==
+## =================================
+# Configure environment
+source ~/Envs/tflite_model_maker_env/bin/activate
+
+ROOT_DIR=${HOME}/RaspberryPi/git/tf_experiments
+LOG_DIR=${ROOT_DIR}/logs
+tensorboard --logdir=${LOG_DIR} --load_fast=false
+# Open in web browser at URL specified in terminal output
+# tensorboard didn't open in Safari, but worked ok in Chrome
+```
+
+## Config for model_maker notebooks
 ```shell
 # ========================
 # == TFLite-Model-Maker ==
@@ -46,4 +91,5 @@ pip install astral==1.10.1 # to avoid compatibility problem with v2
 pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
 # runtime clash with tensorflow:
 # ImportError: generic_type: type "InterpreterWrapper" is already registered!
-# suspect can only use in separate environment```
+# suspect can only use in separate environment
+```
