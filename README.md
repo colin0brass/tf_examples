@@ -44,6 +44,12 @@ LOG_DIR=${ROOT_DIR}/logs
 tensorboard --logdir=${LOG_DIR} --load_fast=false
 # Open in web browser at URL specified in terminal output
 # tensorboard didn't open in Safari, but worked ok in Chrome
+
+## ==========================
+## == Run Jupyter Notebook ##
+## ==========================
+# jupyter notebook
+jupyter-lab --browser='chrome'
 ```
 
 ## Config for model_maker notebooks
